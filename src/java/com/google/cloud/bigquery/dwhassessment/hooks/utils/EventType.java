@@ -13,17 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.google.cloud.bigquery.dwhassessment.hooks.utils;
 
-package com.google.cloud.bigquery.dwhassessment.hooks.logger;
-
-import com.google.cloud.bigquery.dwhassessment.hooks.avro.AvroSchemaLoader;
-import org.apache.avro.Schema;
-
-public final class LoggingHookConstants {
-
-  public static final Schema QUERY_EVENT_SCHEMA = AvroSchemaLoader.loadSchema("QueryEvents.avsc");
-
-  public static final String HOOK_VERSION = "1.0";
-
-  private LoggingHookConstants() {}
+/** Query event type, captured by hook. */
+public enum EventType {
+  QUERY_SUBMITTED,
+  QUERY_COMPLETED,
 }
+
+

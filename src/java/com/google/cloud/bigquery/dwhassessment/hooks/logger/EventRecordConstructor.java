@@ -15,13 +15,16 @@
  */
 package com.google.cloud.bigquery.dwhassessment.hooks.logger;
 
-import static com.google.cloud.bigquery.dwhassessment.hooks.logger.LoggerVarsConfig.MR_QUEUE_NAME;
-import static com.google.cloud.bigquery.dwhassessment.hooks.logger.LoggerVarsConfig.TEZ_QUEUE_NAME;
-import static com.google.cloud.bigquery.dwhassessment.hooks.logger.LoggingHookConstants.HOOK_VERSION;
-import static com.google.cloud.bigquery.dwhassessment.hooks.logger.LoggingHookConstants.QUERY_EVENT_SCHEMA;
+import static com.google.cloud.bigquery.dwhassessment.hooks.utils.LoggerVarsConfig.MR_QUEUE_NAME;
+import static com.google.cloud.bigquery.dwhassessment.hooks.utils.LoggerVarsConfig.TEZ_QUEUE_NAME;
+import static com.google.cloud.bigquery.dwhassessment.hooks.utils.Constants.HOOK_VERSION;
+import static com.google.cloud.bigquery.dwhassessment.hooks.utils.Constants.QUERY_EVENT_SCHEMA;
 import static org.apache.hadoop.hive.ql.hooks.Entity.Type.PARTITION;
 import static org.apache.hadoop.hive.ql.hooks.Entity.Type.TABLE;
 
+import com.google.cloud.bigquery.dwhassessment.hooks.utils.EventStatus;
+import com.google.cloud.bigquery.dwhassessment.hooks.utils.EventType;
+import com.google.cloud.bigquery.dwhassessment.hooks.utils.ExecutionMode;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;

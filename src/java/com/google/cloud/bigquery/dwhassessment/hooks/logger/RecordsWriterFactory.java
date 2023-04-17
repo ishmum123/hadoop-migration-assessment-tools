@@ -34,7 +34,6 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import org.apache.avro.Schema;
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -46,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * Factory for {@link RecordsWriter} instances. Manages them to write to files, partitioned by
  * dates.
  */
-public class DatePartitionedRecordsWriterFactory {
+public class RecordsWriterFactory {
   public static final DateTimeFormatter LOG_TIME_FORMAT =
       new DateTimeFormatterBuilder()
           .parseCaseInsensitive()
@@ -61,7 +60,7 @@ public class DatePartitionedRecordsWriterFactory {
           .toFormatter();
 
   private static final Logger LOG =
-      LoggerFactory.getLogger(DatePartitionedRecordsWriterFactory.class);
+      LoggerFactory.getLogger(RecordsWriterFactory.class);
   private static final FsPermission DIR_PERMISSION = FsPermission.createImmutable((short) 1023);
 
   private final Path basePath;
@@ -72,7 +71,7 @@ public class DatePartitionedRecordsWriterFactory {
   private final String loggerId;
   private final Duration rolloverInterval;
 
-  public DatePartitionedRecordsWriterFactory(
+  public RecordsWriterFactory(
       Path baseDir,
       Configuration conf,
       Schema schema,

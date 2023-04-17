@@ -16,11 +16,11 @@
 
 package com.google.cloud.bigquery.dwhassessment.hooks.logger;
 
-import static com.google.cloud.bigquery.dwhassessment.hooks.logger.LoggerVarsConfig.HIVE_QUERY_EVENTS_BASE_PATH;
-import static com.google.cloud.bigquery.dwhassessment.hooks.logger.LoggerVarsConfig.HIVE_QUERY_EVENTS_QUEUE_CAPACITY;
-import static com.google.cloud.bigquery.dwhassessment.hooks.logger.LoggerVarsConfig.HIVE_QUERY_EVENTS_ROLLOVER_ELIGIBILITY_CHECK_INTERVAL;
-import static com.google.cloud.bigquery.dwhassessment.hooks.logger.LoggerVarsConfig.HIVE_QUERY_EVENTS_ROLLOVER_INTERVAL;
-import static com.google.cloud.bigquery.dwhassessment.hooks.logger.LoggingHookConstants.QUERY_EVENT_SCHEMA;
+import static com.google.cloud.bigquery.dwhassessment.hooks.utils.LoggerVarsConfig.HIVE_QUERY_EVENTS_BASE_PATH;
+import static com.google.cloud.bigquery.dwhassessment.hooks.utils.LoggerVarsConfig.HIVE_QUERY_EVENTS_QUEUE_CAPACITY;
+import static com.google.cloud.bigquery.dwhassessment.hooks.utils.LoggerVarsConfig.HIVE_QUERY_EVENTS_ROLLOVER_ELIGIBILITY_CHECK_INTERVAL;
+import static com.google.cloud.bigquery.dwhassessment.hooks.utils.LoggerVarsConfig.HIVE_QUERY_EVENTS_ROLLOVER_INTERVAL;
+import static com.google.cloud.bigquery.dwhassessment.hooks.utils.Constants.QUERY_EVENT_SCHEMA;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.cloud.bigquery.dwhassessment.hooks.utils.IdGenerator;
@@ -59,7 +59,7 @@ public class EventLogger {
       Duration.ofMinutes(10);
   private static final Duration DEFAULT_ROLLOVER_INTERVAL_DURATION = Duration.ofMinutes(10);
 
-  private final DatePartitionedRecordsWriterFactory recordsWriterFactory;
+  private final RecordsWriterFactory recordsWriterFactory;
   private final EventRecordConstructor eventRecordConstructor;
   private final ScheduledThreadPoolExecutor logWriter;
   private final int queueCapacity;
@@ -156,7 +156,7 @@ public class EventLogger {
     }
   }
 
-  private DatePartitionedRecordsWriterFactory createRecordsWriterFactory(
+  private RecordsWriterFactory createRecordsWriterFactory(
       String baseDir, HiveConf conf, Clock clock) {
     if (baseDir == null) {
       return null;
@@ -170,7 +170,7 @@ public class EventLogger {
                 TimeUnit.MILLISECONDS));
 
     try {
-      return new DatePartitionedRecordsWriterFactory(
+      return new RecordsWriterFactory(
           new Path(baseDir), conf, QUERY_EVENT_SCHEMA, clock, loggerId, rolloverInterval);
     } catch (IOException e) {
       LOG.error("Unable to initialize logger, logging disabled.", e);

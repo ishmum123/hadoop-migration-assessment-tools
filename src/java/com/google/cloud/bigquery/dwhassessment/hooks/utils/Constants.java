@@ -13,10 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.bigquery.dwhassessment.hooks.logger;
 
-/** Completed query event status. */
-public enum EventStatus {
-  SUCCESS,
-  FAIL,
+package com.google.cloud.bigquery.dwhassessment.hooks.utils;
+
+import com.google.cloud.bigquery.dwhassessment.hooks.avro.AvroSchemaLoader;
+import org.apache.avro.Schema;
+
+
+public interface Constants {
+  Schema QUERY_EVENT_SCHEMA = AvroSchemaLoader.loadSchema("QueryEvents.avsc");
+  String HOOK_VERSION = "1.0";
 }

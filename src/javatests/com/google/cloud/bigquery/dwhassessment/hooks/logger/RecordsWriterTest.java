@@ -16,7 +16,7 @@
 
 package com.google.cloud.bigquery.dwhassessment.hooks.logger;
 
-import static com.google.cloud.bigquery.dwhassessment.hooks.logger.LoggingHookConstants.QUERY_EVENT_SCHEMA;
+import static com.google.cloud.bigquery.dwhassessment.hooks.utils.Constants.QUERY_EVENT_SCHEMA;
 import static com.google.common.truth.Truth.assertThat;
 
 import java.io.IOException;

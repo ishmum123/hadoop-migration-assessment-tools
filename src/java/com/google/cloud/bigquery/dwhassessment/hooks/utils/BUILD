@@ -19,6 +19,8 @@ java_library(
     name = "utils",
     srcs = glob(["*.java"]),
     deps = [
+        "//src/java/com/google/cloud/bigquery/dwhassessment/hooks/avro",
         "@maven//:commons_lang_commons_lang",
+        "@maven//:org_apache_avro_avro",
     ],
 )

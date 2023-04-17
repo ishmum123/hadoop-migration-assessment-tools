@@ -18,7 +18,7 @@ java_library(
     testonly = 1,
     srcs = glob(["*.java"]),
     deps = [
-        "//src/java/com/google/cloud/bigquery/dwhassessment/hooks/logger/utils",
+        "//src/java/com/google/cloud/bigquery/dwhassessment/hooks/utils",
         "@maven_tests//:com_google_truth_truth",
         "@maven_tests//:commons_lang_commons_lang",
         "@maven_tests//:junit_junit",

@@ -188,15 +188,12 @@ public class EventLogger {
   }
 
   private void maybeRolloverWriterForDay() throws IOException {
-    if (writer == null || recordsWriterFactory.shouldRollover()) {
-      if (writer != null) {
-        IOUtils.closeQuietly(writer);
-        writer = null;
-      }
-
-      writer = recordsWriterFactory.createWriter();
-      recordsWriterFactory.maybeUpdateRolloverTime();
-    }
+    if (!(writer == null || recordsWriterFactory.shouldRollover()))
+      return;
+    if (writer != null)
+      IOUtils.closeQuietly(writer);
+    writer = recordsWriterFactory.createWriter();
+    recordsWriterFactory.maybeUpdateRolloverTime();
   }
 
   private synchronized void writeEventWithRetries(GenericRecord event) {
